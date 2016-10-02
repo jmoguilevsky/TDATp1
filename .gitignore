@@ -1,0 +1,4 @@
+*.swp       # Extension de vim
+*~          # Extension de gedit
+*.pyc       # Compilados
+
