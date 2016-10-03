@@ -7,7 +7,6 @@ def k_selecciones(conjunto, k):
 		return None
 
 	for i in xrange(k):
-
 		minElem = conjunto[i]
 		minPos = i
 		for pos in xrange(i, tamConjunto):
