@@ -12,9 +12,10 @@ import plotter
 
 from fuerza_bruta import fuerza_bruta
 from ordenar_seleccionar import ordenar_seleccionar
-
-# Truqueta: se podria pasar esto como argumento argv[1] y llamar exec(argv[1]) mas tarde. Aguante la reflexion!
-ALGORITMO = ordenar_seleccionar
+from heap_select import heap_select
+from k_heap_sort import k_heap_sort
+from k_selecciones import k_selecciones
+from quick_select import quick_select
 
 LONGITUD_MUESTRA = 1000
 CANT_INTERVALOS = 10
@@ -22,6 +23,9 @@ TAMANIO_MUESTRA = 20
 
 
 def generarListasRandom(n):
+    """ A partir de un numero n, genera un lista de n muestras random,
+        cada una de LONGITUD_MUESTRA elementos
+    """
     muestras = []
     for i in range(n):
         muestra = []
@@ -30,14 +34,18 @@ def generarListasRandom(n):
         muestras.append(muestra)
     return muestras
 
-def calcularTiempo(muestras, k):
+def calcularTiempo(algoritmo, muestras, k):
+    """ Dado un algoritmo y un conjunto de muestras, calcula el tiempo que le lleva
+        al algoritmo ejecutar cada muestra y devuelve el promedio del tiempo total
+        sobre la cantidad de muestras
+    """
     i = 0
     cantMuestras = len(muestras)
     tiempoTotal = 0
     for muestra in muestras:
         sys.stdout.write("\r  {}%  ".format(int(i*100.0/cantMuestras))); sys.stdout.flush()
         start = time.time()
-        ALGORITMO(muestra, k)
+        eval(algoritmo)(muestra, k)
         tiempoTotal += time.time() - start
         i += 1
     print("\r  100%  ")
@@ -45,8 +53,13 @@ def calcularTiempo(muestras, k):
 
 
 
-def main():
-    nombreAlgoritmo = 'algoritmo_' + str(ALGORITMO).split()[1]
+def main(algoritmo):
+    """ Genera una lista de muestras random y calcula los resultados de 
+        ejecutar las muestras con distinto valor de K para un algoritmo
+        pasado por parametro.
+        Luego dibuja los resultados obtenidos
+    """
+    nombreAlgoritmo = 'algoritmo_' + algoritmo
     output = open(nombreAlgoritmo + '.tsv', 'w')
 
     muestras = generarListasRandom(TAMANIO_MUESTRA)
@@ -54,7 +67,7 @@ def main():
     resultados = []
     for k in intervalos:
         print "k = {}".format(k)
-        valorMuestra = k, calcularTiempo(muestras, k)
+        valorMuestra = k, calcularTiempo(algoritmo, muestras, k)
         resultados.append(valorMuestra)
 
     output.write('k\ttiempo\n')
@@ -65,6 +78,7 @@ def main():
     plotter.showResults()
 
 
-
 if __name__ == "__main__":
-    main()
+    if len(sys.argv) != 2:
+        raise ValueError('Se debe ingresar como unico argumento el nombre del algoritmo')
+    sys.exit(main(sys.argv[1]))
