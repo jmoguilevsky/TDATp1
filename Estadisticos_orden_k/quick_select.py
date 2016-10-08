@@ -18,7 +18,7 @@ def partition(list, left,right):
 
 
 
-def quickselect(list,left,right,k):
+def quick_select(list,left,right,k):
     """
     """
 
@@ -32,6 +32,6 @@ def quickselect(list,left,right,k):
         return list[listRelativeK]
     else:
         if listRelativeK < pivotIndex:
-             return quickselect(list,left,pivotIndex - 1,k)
+             return quick_select(list,left,pivotIndex - 1,k)
         else:
-            return quickselect(list,pivotIndex + 1, right, k)
+            return quick_select(list,pivotIndex + 1, right, k)

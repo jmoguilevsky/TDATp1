@@ -9,11 +9,9 @@
 from k_selecciones import k_selecciones
 from fuerza_bruta import fuerza_bruta
 from ordenar_seleccionar import ordenar_seleccionar
-from quickselect import quickselect
+from quick_select import quick_select
 from k_heap_sort import k_heap_sort
 from heap_select import heap_select
-from Heap import MinHeap
-from Heap import MaxHeap
 
 import unittest
 
@@ -32,13 +30,10 @@ class TestEstadisticoClass(unittest.TestCase):
 		self.assertEqual(ordenar_seleccionar(conjunto, k), 22)
 
 	def test_dado_un_conjunto_quickselect_devuelve_el_k_elem_mas_chico(self):
-		self.assertEqual(quickselect(conjunto,0,len(conjunto) - 1,k),22)
+		self.assertEqual(quick_select(conjunto,0,len(conjunto) - 1,k),22)
 
 	def test_dado_un_conjunto_k_heap_sort_devuelve_el_k_elem_mas_chico(self):
-		heap = MinHeap()
-		for elem in conjunto:
-			heap.ingresar(elem)
-		self.assertEqual(k_heap_sort(heap, k), 22)
+		self.assertEqual(k_heap_sort(conjunto, k), 22)
 
 	def test_dado_un_conjunto_k_heap_select_devuelve_el_k_elem_mas_chico(self):
 		self.assertEqual(heap_select(conjunto, k), 22)
