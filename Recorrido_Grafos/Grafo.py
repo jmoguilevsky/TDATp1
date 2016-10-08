@@ -101,46 +101,44 @@ class Digraph(object):
 
   El grafo se crea vacío, se añaden las aristas con add_edge(). Una vez
   creadas, las aristas no se pueden eliminar, pero siempre se puede añadir
-  nuevas aristas.
+  nuevas aristas.	
   """
   def __init__(g, V):
     """Construye un grafo sin aristas de V vértices.
     """
-    g.vertices = []
-    for v in V:
-    	g.vertices.append(Vertex(v))
-    g.edges = []
+    g.edges = {}
+    g.vertices = V
+    for v in xrange(V):
+    	g.edges[v] = []
 
   def V(g):
     """Número de vértices en el grafo.
     """
-    return len(g.vertices)
+    return g.vertices
 
   def E(g):
     """Número de aristas en el grafo.
     """
-    return len(g.edges)
+    return sum([len(g.edges[e]) for e in g.edges])
 
   def adj_e(g, v):
     """Itera sobre los aristas incidentes _desde_ v.
     """
-    return iter([e.source for e in g.vertices[v].getIncidents()])
+    return iter(g.edges[v])
 
   def adj(g, v):
     """Itera sobre los vértices adyacentes a ‘v’.
     """
-    return iter([e.destiny for e in g.vertices[v].getAdjacents()])
+    return iter([e.destiny for e in g.edges[v]])
 
   def add_edge(g, u, v, weight=0):
     """Añade una arista al grafo.
     """
-    g.edges.append(Edge(u,v,weight))
-    g.vertices[u].add_adjacent(v,weight)
-    g.vertices[v].add_incident(u,weight)    
+    g.edges[u].append(Edge(u,v,weight))
 
   def __iter__(g):
     """Itera de 0 a V."""
-    return iter(range(g.V()))
+    return iter(xrange(g.V()))
 
   def iter_edges(g):
     """Itera sobre todas las aristas del grafo.
@@ -151,7 +149,7 @@ class Digraph(object):
         • e.dst
         • e.weight
     """
-    return iter(g.edges)
+    return iter([x for e in g.edges for x in g.edges[e]])
 
 class Edge(object):
 	"""Arista de un grafo.
@@ -169,23 +167,3 @@ class Edge(object):
 	def __cmp__(self, other):
 		if other == None: return -1
 		return (self.source == other.source) and (self.destiny == other.destiny) and (self.weight == other.weight)
-
-class Vertex(object):
-	"""Vertice de un grafo
-	"""
-	def __init__(self, v):
-		self.value = v
-		self.adjacents = []
-		self.incidents = []
-
-	def add_adjacent(self, other, weight):
-		self.adjacents.append(Edge(self.value, other, weight))
-	
-	def add_incident(self, other, weight):
-		self.incidents.append(Edge(other, self.value, weight))	
-
-	def getAdjacents(self):
-		return self.adjacents
-
-	def getIncidents(self):
-		return self.incidents
