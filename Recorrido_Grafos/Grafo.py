@@ -149,7 +149,7 @@ class Digraph(object):
         • e.dst
         • e.weight
     """
-    return iter([x for e in g.edges for x in g.edges[e]])
+    return iter([x for e in g.edges for x in g.edges[e	]])
 
 class Edge(object):
 	"""Arista de un grafo.
