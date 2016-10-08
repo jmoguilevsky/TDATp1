@@ -7,12 +7,17 @@ class Algorithm(object):
 		self.origin = origin
 		self.destiny = destiny
 		self.heuristic = heuristic
+		self.road = []
 
 	def visited(self, v):
-		return True
+		return v in self.road
 
 	def distance(self, v):
-		return 1
+		if not self.visited(v):
+			return float("inf")
+		return self.road.index(v)
 
 	def camino(self, v):
-		return []
+		if not self.visited(v):
+			return None
+		return self.road[0:self.road.index(v)]
