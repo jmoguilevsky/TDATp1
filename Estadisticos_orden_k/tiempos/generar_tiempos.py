@@ -22,6 +22,8 @@ TAMANIO_MUESTRA = 20
 
 
 def generarListasRandom(n):
+    """
+    """
     muestras = []
     for i in range(n):
         muestra = []
@@ -31,6 +33,8 @@ def generarListasRandom(n):
     return muestras
 
 def calcularTiempo(muestras, k):
+    """
+    """
     i = 0
     cantMuestras = len(muestras)
     tiempoTotal = 0
@@ -46,6 +50,8 @@ def calcularTiempo(muestras, k):
 
 
 def main():
+    """
+    """
     nombreAlgoritmo = 'algoritmo_' + str(ALGORITMO).split()[1]
     output = open(nombreAlgoritmo + '.tsv', 'w')
 

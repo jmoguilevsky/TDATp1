@@ -3,6 +3,8 @@ def swap(a,b):
 
 
 def partition(list, left,right):
+    """
+    """
     storeIndex = left
     pivotValue = list[right]
 
@@ -17,6 +19,8 @@ def partition(list, left,right):
 
 
 def quickselect(list,left,right,k):
+    """
+    """
 
     listRelativeK = k - 1;
     if ( left == right ):
