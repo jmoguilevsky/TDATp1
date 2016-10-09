@@ -15,6 +15,7 @@ class DijkstraTest(unittest.TestCase):
 		self.graph.add_edge(1,8,2)
 		self.graph.add_edge(2,8,4)
 		self.graph.add_edge(6,8,2)
+		self.dijkstra = Dijkstra(self.graph, 0, 8)
 		
 
 	def test_createAlgorithm(self):
@@ -26,8 +27,12 @@ class DijkstraTest(unittest.TestCase):
 		self.assertIsNotNone(dijkstra)
 
 	def test_CaseOne(self):
-		self.dijkstra = Dijkstra(self.graph, 0, 8)
-		print(self.dijkstra.camino(8))
+		self.assertEqual(self.dijkstra.distance(8), 4)
+
+	def test_CaseTwo(self):
+		self.assertEqual(self.dijkstra.distance(4), float("inf"))
+
+	def test_CaseThree(self):
 		self.assertEqual(self.dijkstra.distance(1), 2)
 
 if __name__ == '__main__':

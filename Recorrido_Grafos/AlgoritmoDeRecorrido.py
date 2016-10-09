@@ -8,6 +8,8 @@ class Algorithm(object):
 		self.destiny = destiny
 		self.heuristic = heuristic
 		self.road = []
+		self.algorithm()
+		self.generate_road()
 
 	def visited(self, v):
 		return v in self.road
@@ -15,7 +17,7 @@ class Algorithm(object):
 	def distance(self, v):
 		if not self.visited(v):
 			return float("inf")
-		return self.road.index(v)
+		return self.getDistance(v)
 
 	def camino(self, v):
 		if not self.visited(v):
