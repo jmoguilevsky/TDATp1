@@ -35,5 +35,8 @@ class DijkstraTest(unittest.TestCase):
 	def test_CaseThree(self):
 		self.assertEqual(self.dijkstra.distance(1), 2)
 
+	def test_EdgeTo(self):
+		self.assertEqual(self.dijkstra._edge_to(8), 1)
+
 if __name__ == '__main__':
 	unittest.main()
