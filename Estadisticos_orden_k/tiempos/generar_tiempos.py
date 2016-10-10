@@ -17,9 +17,9 @@ from k_heap_sort import k_heap_sort
 from k_selecciones import k_selecciones
 from quick_select import quick_select
 
-LONGITUD_MUESTRA = 1000
+LONGITUD_MUESTRA = 500
 CANT_INTERVALOS = 10
-TAMANIO_MUESTRA = 20
+TAMANIO_MUESTRA = 200
 
 
 def generarListasRandom(n):
@@ -54,7 +54,7 @@ def calcularTiempo(algoritmo, muestras, k):
 
 
 def main(algoritmo):
-    """ Genera una lista de muestras random y calcula los resultados de 
+    """ Genera una lista de muestras random y calcula los resultados de
         ejecutar las muestras con distinto valor de K para un algoritmo
         pasado por parametro.
         Luego dibuja los resultados obtenidos
@@ -66,6 +66,7 @@ def main(algoritmo):
     intervalos = [LONGITUD_MUESTRA*i/CANT_INTERVALOS for i in range(CANT_INTERVALOS)]
     resultados = []
     for k in intervalos:
+        k += 1
         print "k = {}".format(k)
         valorMuestra = k, calcularTiempo(algoritmo, muestras, k)
         resultados.append(valorMuestra)

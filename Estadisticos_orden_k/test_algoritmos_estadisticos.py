@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 #
-# Este script prueba que los algoritmos estadisticos de orden k 
+# Este script prueba que los algoritmos estadisticos de orden k
 # implementados (fuerza bruta) funcionan correctamente devolviendo
 # el minimo K esimo elemento de un conjunto
 #
@@ -30,7 +30,7 @@ class TestEstadisticoClass(unittest.TestCase):
 		self.assertEqual(ordenar_seleccionar(conjunto, k), 22)
 
 	def test_dado_un_conjunto_quickselect_devuelve_el_k_elem_mas_chico(self):
-		self.assertEqual(quick_select(conjunto,0,len(conjunto) - 1,k),22)
+		self.assertEqual(quick_select(conjunto,k),22)
 
 	def test_dado_un_conjunto_k_heap_sort_devuelve_el_k_elem_mas_chico(self):
 		self.assertEqual(k_heap_sort(conjunto, k), 22)
