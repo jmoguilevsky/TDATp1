@@ -1,31 +1,23 @@
 import unittest
-from Grafo import Grafo
+from Grafo import *
 from BFS import *
 
 class BFSTest(unittest.TestCase):
 
     def setUp(self):
-        self.graph = Grafo.Grafo()
-        self.graph.agregar_vertice(0)
-        self.graph.agregar_vertice(1)
-        self.graph.agregar_vertice(2)
-        self.graph.agregar_vertice(3)
-        self.graph.agregar_vertice(4)
-
-        self.graph.agregar_arista(10, 0, 1)
-        self.graph.agregar_arista(20, 1, 4)
-        self.graph.agregar_arista( 1, 0, 2)
-        self.graph.agregar_arista( 2, 2, 3)
-        self.graph.agregar_arista( 3, 3, 4)
+        self.graph = Digraph(5)
+        self.graph.add_edge(0, 1, 10)
+        self.graph.add_edge(1, 4, 20)
+        self.graph.add_edge(0, 2,  1)
+        self.graph.add_edge(2, 3,  2)
+        self.graph.add_edge(3, 4,  3)
 
         self.bfs = BFS(self.graph, 0, 4)
         
 
     def test_createAlgorithm(self):
-        graph = Grafo.Grafo()
-        graph.agregar_vertice(0)
-        graph.agregar_vertice(1)
-        graph.agregar_arista(1, 0, 1)
+        graph = Digraph(2)
+        graph.add_edge(0, 1, 1)
         bfs = BFS(graph, 0, 1)
         self.assertIsNotNone(bfs)
 

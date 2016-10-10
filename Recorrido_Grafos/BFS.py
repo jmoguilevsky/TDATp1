@@ -11,17 +11,18 @@ class BFS(Algorithm):
         
     def algorithm(self):
         marked = Set([self.origin])
-        queue = deque([(0, self.origin)])
+        queue = deque([self.origin])
         
         found = False
         while not found:
             actual = queue.popleft()
-            unmarkedAdjacents = filter(lambda x, m=marked: x[1] not in m, self.graph.adyacentes(actual[1]))
-            for node in unmarkedAdjacents:
-                self.paths[node[1]] = {'previous': actual[1], 'weight': node[0]}
-                queue.append(node)
-                marked.add(node[1])
-                if node[1] == self.destiny:
+            unmarkedAdjacents_e = filter(lambda x, m=marked: x.destiny not in m, self.graph.adj_e(actual))
+            #unmarkedAdjacents = map(lambda x: x.destiny, unmarkedAdjacents_e)
+            for node in unmarkedAdjacents_e:
+                self.paths[node.destiny] = {'previous': actual, 'weight': node.weight}
+                queue.append(node.destiny)
+                marked.add(node.destiny)
+                if node.destiny == self.destiny:
                     return
 
 
