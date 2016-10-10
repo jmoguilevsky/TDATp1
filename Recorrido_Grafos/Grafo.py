@@ -52,11 +52,18 @@ class Grafo(object):
 		except KeyError:
 			raise Exception("Uno de los vértices no existe")
 
-	def adyacentes(self, vertice):
+	def adyacentes(self, v):
+		""" Devuelve lista de dupla (peso, vertice) donde cada vertice es adyacente a v """
 		try:
-			return map(lambda x: x[1].dato, self.vertices[self.conversion[vertice]])
+			return map(lambda x: (x[0], x[1].dato), self.vertices[self.conversion[v]])
 		except KeyError:
-			raise Exception("Uno de los vértices no existe")
+			raise Exception("Vertice {} no existe".format(v))
+
+	def peso(self, vertice):
+		try:
+			return self.vertices[self.conversion[vertice]].peso
+		except KeyError:
+			raise Exception("Vertice {} no existe".format(vertice))
 
 	def dijkstra(self,vertice_inicial):
 		"""Implementación del algoritmo de Dijkstra utilizando una cola de prioridad:

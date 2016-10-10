@@ -10,11 +10,11 @@ def actualizar_heap(heap,vertice, parVertice):
 		heapify(heap)
 
 
-class Dijkstra(Algorithm):
+class Heuristic(Algorithm):
 
-	def __init__(self, g, origin, destiny, vertexToXYMap = None, heuristic = None):
+	def __init__(self, g, origin, destiny, vertexToXYMap, heuristic):
 		self.vertices = {}
-		super(Dijkstra, self).__init__(g, origin, destiny)
+		super(Heuristic, self).__init__(g, origin, destiny, vertexToXYMap, heuristic)
 
 	def generate_road(self):
 		"""Funcion auxiliar que dado un vertice agrega sus previos a la lista.
@@ -25,10 +25,10 @@ class Dijkstra(Algorithm):
 			self.road.insert(0,previous)
 			previous = self.vertices[previous]["previous"]
 
-	def relajar_vertice(self, heap,vertice1, parVertice1, parVertice2,peso_arista):
+	def relajar_vertice(self, heap,vertice1, parVertice1, vertice2 , parVertice2,peso_arista):
 		"""Funcion auxiliar que dado dos vertices y un peso determina si el valor de la distancia
 		minima entre ellos debe ser actualizado; y en caso afirmativo lo actualiza."""
-		d = parVertice1["dist"] + peso_arista
+		d = self.heuristic(self.vertexToXYMap[vertice1], self.vertexToXYMap[vertice2]) + peso_arista
 		if d < parVertice2["dist"]:
 			parVertice2["dist"] = d
 			parVertice2["previous"] = vertice1
@@ -55,7 +55,7 @@ class Dijkstra(Algorithm):
 			v = heappop(heap)
 			vertex = v[1]
 			for e in self.graph.adj_e(vertex): #adyacente es Edge
-				self.relajar_vertice(heap, vertex, self.vertices[vertex], self.vertices[e.destiny], e.weight)
+				self.relajar_vertice(heap, vertex, self.vertices[vertex], e.destiny, self.vertices[e.destiny], e.weight)
 				actualizar_heap(heap,vertex, self.vertices[vertex])
 
 	def getDistance(self, v):
