@@ -1,3 +1,5 @@
+import random
+
 def swap(a,b):
     return b,a
 
@@ -10,14 +12,15 @@ def partition(list, left,right):
     los que son mayores y devuelve el nuevo indice del pivote
     """
     storeIndex = left
-    pivotValue = list[right]
+    pivotIndex = random.randint(left,right);
+    pivotValue = list[pivotIndex]
 
-    for i in range(left,right):
+    for i in range(left,right+1):
         if( list[i] < pivotValue ):
             list[i],list[storeIndex] = swap(list[i] , list[storeIndex])
             storeIndex = storeIndex + 1
 
-    list[right],list[storeIndex] = swap(list[right],list[storeIndex])
+    list[pivotIndex],list[storeIndex] = swap(list[pivotIndex],list[storeIndex])
     return storeIndex
 
 
@@ -43,7 +46,7 @@ def select(list,left,right,k):
     listRelativeK = k - 1;
 
     if( listRelativeK < left  or listRelativeK > right):
-        print("Index wont belong to the ")
+        print("k no pertenece al conjunto")
         return -1
 
     while True:
