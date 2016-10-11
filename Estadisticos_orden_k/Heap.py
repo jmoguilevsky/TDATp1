@@ -14,6 +14,16 @@ class Heap:
 		"""
 		self.elementos = []
 
+	def heapify(self, elementos):
+		""" A partir de un conjunto de elementos, se lo convierte en un Heap
+		"""
+		self.elementos = elementos
+		pos_inicial = (len(elementos) - 2) / 2
+		while pos_inicial >= 0:
+			self.__downheap__(pos_inicial)
+			pos_inicial -= 1
+
+
 	def ingresar(self, elem):
 		""" INgresa un elemento al final del vector de elementos.
 			Luego aplica el metodo upheap para ubicarlo en la 
