@@ -5,8 +5,7 @@ def k_heap_sort(conjunto, k):
 		Si k es mas grande que el tamanio del conjunto devuelve None.
 	"""
 	heap = MinHeap()
-	for elem in conjunto:
-		heap.ingresar(elem)
+	heap.heapify(conjunto)
 
 	for i in xrange(k - 1):
 		heap.sacar_primero()

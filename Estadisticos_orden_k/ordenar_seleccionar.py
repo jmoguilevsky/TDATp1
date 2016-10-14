@@ -7,4 +7,3 @@ def ordenar_seleccionar(conjunto, k):
 		return None
 		
 	return sorted(conjunto)[k - 1]
-

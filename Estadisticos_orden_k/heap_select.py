@@ -8,8 +8,8 @@ def heap_select(conjunto, k):
 		return None
 
 	heap = MaxHeap()
-	for i in xrange(k):
-		heap.ingresar(conjunto[i])
+	heap.heapify(conjunto[:k])
+
 	for j in xrange(k, len(conjunto)):
 		if conjunto[j] < heap.obtener_primero():
 			heap.sacar_primero()
